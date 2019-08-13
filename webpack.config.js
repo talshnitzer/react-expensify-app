@@ -14,7 +14,7 @@ module.exports = (env) => { //the env arg is defined in build:prod script in pac
     return {
         entry: './src/app.js',
         output: {
-            path: path.join(__dirname,'public'),
+            path: path.join(__dirname,'public','dist'),
             filename: 'bundle.js'
         },
         // process CSS file or SCSS file, then take that text and 
@@ -52,7 +52,8 @@ module.exports = (env) => { //the env arg is defined in build:prod script in pac
         devtool: isProduction ? 'source-map' : 'inline-source-map',
         devServer: {
             contentBase: path.join(__dirname,'public'),
-            historyApiFallback: true        //tells the server that we're going to be handling routing via our client side code and that it should return index.html for all 404 routes 
+            historyApiFallback: true,        //tells the server that we're going to be handling routing via our client side code and that it should return index.html for all 404 routes 
+            publicPath: '/dist/'
         }
     };
 };
