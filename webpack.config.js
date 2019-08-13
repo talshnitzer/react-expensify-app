@@ -8,6 +8,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = (env) => { //the env arg is defined in build:prod script in package.json by '--env' flag
     const isProduction = env === 'production';
+    //extracting css to a seperate file is better for performance as your CSS will be loaded in parallel with your JavaScript bundle. 
     const CSSExtract = new ExtractTextPlugin('styles.css'); //plugin to make webpack save the css compiled files outside of bundle.js, in a file name we pass here as arg
 
     return {
