@@ -19,6 +19,7 @@ module.exports = (env) => { //the env arg is defined in build:prod script in pac
         },
         // process CSS file or SCSS file, then take that text and 
         //instead of including it inline, dump it into a separate file. (production adition)
+        //A loader lets you customize the behavior of web pack when it loads a given file.
         module: {
             rules: [{
                 loader: 'babel-loader', //load are we trying to use
@@ -50,13 +51,15 @@ module.exports = (env) => { //the env arg is defined in build:prod script in pac
         //A source map provides a way of mapping code within a compressed file back to it’s original position in a source file. 
         //This means that – with the help of a bit of software – you can debug your applications even after your assets have been optimized
         devtool: isProduction ? 'source-map' : 'inline-source-map',
+        //Development Server
         devServer: {
-            contentBase: path.join(__dirname,'public'),
+            contentBase: path.join(__dirname,'public'),//this is where the static files (index.html) are
             historyApiFallback: true,        //tells the server that we're going to be handling routing via our client side code and that it should return index.html for all 404 routes 
-            publicPath: '/dist/'
+            publicPath: '/dist/'    //this is where the bundle (compiled) files are,
+                                    //the path is relative to the root of the web server and not my file system
         }
     };
 };
 
 
-//A loader lets you customize the behavior of web pack when it loads a given file.
+

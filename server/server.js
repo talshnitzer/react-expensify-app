@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 //the backend of our application. 
 //A server is a program that serves our application to network requests,
 // so when anyone requests our web page, we send them our application in response.
-//- every request that comes in, gets sent back our index.html file, 
+//- every request that comes in, our index.html file gets sent back, 
 //which in turn fetches our bundle.js file and bootstraps our React app from there.
 
 //customize the server to serve up the public folder
