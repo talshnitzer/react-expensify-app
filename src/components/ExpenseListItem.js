@@ -5,7 +5,7 @@ import numeral from 'numeral';
 
 //dybamic 'to' attribute: to inject the 'id', create the javascript expression '{}' and inside a template string 
 //to format the date - momentjs.com>docs>display
-//to format currency - 'numeral' lib. numeraljs.com
+//to format currency - 'numeral' lib at numeraljs.com. this lib can be customise to use local currency
 const ExpenseListItem = ({ description, amount, createdAt, id}) => (
     <div>
         <Link to={`/edit/${id}`} > 
