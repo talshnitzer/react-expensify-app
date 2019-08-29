@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
-import { addExpense } from '../actions/expenses';
+import { startAddExpense } from '../actions/expenses';
 
 //confeting the stateless function componenet into a class, 
 //so We no longer define the function 'onSubmit' inline,
@@ -10,7 +10,7 @@ import { addExpense } from '../actions/expenses';
 
 export class AddExpensePage extends React.Component {
     onSubmit = (expense)=> {
-        this.props.addExpense(expense); 
+        this.props.startAddExpense(expense); 
         this.props.history.push('/'); 
     };
     render() {
@@ -27,7 +27,7 @@ export class AddExpensePage extends React.Component {
 
  //connecting the dispatch call to addExpense, from outside to the AddExensePage for testing purpose
  const mapDispatchToProps = (dispatch) => ({
-    addExpense: (expense) => dispatch(addExpense(expense))
+    startAddExpense: (expense) => dispatch(startAddExpense(expense))
  });
 
  export default connect(undefined, mapDispatchToProps)(AddExpensePage);

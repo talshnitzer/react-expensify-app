@@ -1,5 +1,28 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+
+//setup of NODE_ENV: set it equal to itself. or if it doesn't exist set it equal to the string 'development'.
+//So it will be string 'production' on Heroku, the string 'test' in the test environment,
+//or If it's neither of those, than we know it's development, and we're going to use that value.
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+//we're not going to do is put the values in the code
+//because than we would be in a situation where we have secret information in our code. 
+//and we never want to commit this stuff.
+//So what we create separate files one for test and one for development. 
+//Those gonna be excluded from the git repository and we're going to read those files in right here:
+
+if (process.env.NODE_ENV === 'test') {
+    require('dotenv').config( { path:'.env.test' }); //module that loads environment variables from a .env file into process.env
+} else if (process.env.NODE_ENV) {
+    require('dotenv').config( { path:'.env.development' });
+}
+
+//This is an environment variable that stores the environment you're currently in.
+//this gets automatically set on Heroku. Heroku sets this value equal to the string 'production'.
+//process.env.NODE_ENV
 
 //entry -> output
 
@@ -46,7 +69,16 @@ module.exports = (env) => { //the env arg is defined in build:prod script in pac
             }]
         },
         plugins: [
-            CSSExtract
+            CSSExtract,
+            new webpack.DefinePlugin({ //we need to pass six values down into our client side javascript
+                'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY), //'variable set in our client side javascript': same_variable_in_the_node_environment
+                'process.env.FIREBASE_AUTH_DOMAIN': JSON.stringify(process.env.FIREBASE_AUTH_DOMAIN),
+                'process.env.FIREBASE_DATABASE_URL': JSON.stringify(process.env.FIREBASE_DATABASE_URL),
+                'process.env.FIREBASE_PROJECT_ID': JSON.stringify(process.env.FIREBASE_PROJECT_ID),
+                'process.env.FIREBASE_STORAGE_BUCKET': JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
+                'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID),
+                'process.env.FIREBASE_APP_ID': JSON.stringify(process.env.FIREBASE_APP_ID)
+            })
         ],
         //A source map provides a way of mapping code within a compressed file back to it’s original position in a source file. 
         //This means that – with the help of a bit of software – you can debug your applications even after your assets have been optimized
