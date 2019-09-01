@@ -56,7 +56,7 @@ const firebaseConfig = {
 // });
 
 // //converting firebase objects structure into an array straucture
-// //-----------------------
+// //---------------------------
 // // database.ref('expenses').on('value',(snapshot) => {
 // //     const expenses = [];
 // //     snapshot.forEach((childSnapshot) => {
@@ -131,6 +131,7 @@ const firebaseConfig = {
 //   //database.ref('notes').set(notes);
 
 //   //READ from firebase
+//------------------------
 //   //we have two ways we can read data: we can fetch data a single time,
 //   // or we can fetch data by subscribing which allows us to get notified on changes.
 
