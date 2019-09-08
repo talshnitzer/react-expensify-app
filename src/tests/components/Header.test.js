@@ -2,10 +2,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 //import toJSON from 'enzyme-to-json';
 import ReactShallowRenderer from 'react-test-renderer/shallow';
-import Header from '../../components/Header';
+import {Header} from '../../components/Header';
 
 test('should render Header correctly', () => {
-    const wrapper = shallow(<Header />);
+    const wrapper = shallow(<Header startLogout={() => { }}/>);
     expect(wrapper).toMatchSnapshot(); //the toJSON serializer (example below) operate automatically by configuration in jest.config.json file
     //expect(toJSON(wrapper)).toMatchSnapshot(); //take the wrapper and extract
                                                 //just the meaningful stuff the rendered output(.snap file)
@@ -21,4 +21,11 @@ test('should render Header correctly', () => {
     // expect(renderer.getRenderOutput()).toMatchSnapshot();
 
     //console.log(renderer.getRenderOutput()); //return the rendered output of the JSX you put in
+});
+
+test('should call startLogout on button click', () => {
+    const startLogout = jest.fn();
+    const wrapper = shallow(<Header startLogout={startLogout}></Header>);
+    wrapper.find('button').simulate('click');
+    expect(startLogout).toHaveBeenCalled();
 });

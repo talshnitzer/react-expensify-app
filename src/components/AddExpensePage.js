@@ -11,7 +11,7 @@ import { startAddExpense } from '../actions/expenses';
 export class AddExpensePage extends React.Component {
     onSubmit = (expense)=> {
         this.props.startAddExpense(expense); 
-        this.props.history.push('/'); 
+        this.props.history.push('/'); //History is passed into this component because 'AddExpensePage' is registered with a 'route'
     };
     render() {
         return (

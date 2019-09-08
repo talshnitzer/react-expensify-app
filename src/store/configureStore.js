@@ -1,7 +1,9 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'; //apply middleware lets you add middleware to your store. in order to use 'thunk' middleware
+import thunk from 'redux-thunk'; //lets us dispatch functions and async logic
 import expensesReducer from '../reducers/expenses';
 import filtersReducer from '../reducers/filters';
-import thunk from 'redux-thunk'; //lets us dispatch functions and async logic
+import authReducer from '../reducers/auth';
+
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -11,7 +13,8 @@ export default () => {  //when we import the function, the default export from c
 const store = createStore(
     combineReducers({
         expenses: expensesReducer,   //create an object and put the array on the expenses property
-        filters: filtersReducer
+        filters: filtersReducer,
+        auth: authReducer
     }),
     composeEnhancers(applyMiddleware(thunk))
     //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() //configure of redux devtool before using middleware

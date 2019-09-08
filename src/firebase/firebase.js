@@ -27,7 +27,10 @@ const firebaseConfig = {
 
   const database = firebase.database();
 
-  export { firebase, database as default };
+  //Creating an instance of a provider.'provider' is a way to provide authentication like Google/twitter/Facebook
+  const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+
+  export { firebase, googleAuthProvider, database as default };
 
 
 
