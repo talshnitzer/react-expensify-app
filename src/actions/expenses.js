@@ -44,8 +44,9 @@ export const addExpense = (expense) => ({
 //we write some data to firebase, waiting for that data to correctly sync,
 //then we'll use dispatch to dispatch addExpense so the redux store reflects those changes as well.
 export const startAddExpense = (expenseData = {}) => { //I get some expenseData as an argument, and if I don't I set it equal to an empty object.
-    return (dispatch) => {             //this will work because we installed the 'thunk' middleware. w/o it it will not work.
+    return (dispatch, getState) => {             //this will work because we installed the 'thunk' middleware. w/o it it will not work. this gives us access to dispatch and get state fundtions
                                         //returning a function instead of an object
+        const uid = getState().auth.uid;
         const {
         description  = '', 
         note = '', 
@@ -55,7 +56,7 @@ export const startAddExpense = (expenseData = {}) => { //I get some expenseData 
         const expense = {description, note, amount, createdAt};
 
         //by returning the promise chain, we can continue chaining on over at expenses.test.js
-        return database.ref('expenses').push(expense).then((ref) => {
+        return database.ref(`users/${uid}/expenses`).push(expense).then((ref) => {
             dispatch(addExpense({
                 id: ref.key,
                 ...expense
@@ -71,9 +72,10 @@ export const removeExpense = ({id}) => ({
 });
 
 export const startRemoveExpense = ({id} = {}) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
         return database
-            .ref(`expenses/${id}`)
+            .ref(`users/${uid}/expenses/${id}`)
             .remove()
             .then(() => {
                 dispatch(removeExpense({id}));
@@ -91,8 +93,9 @@ export const editExpense = (id, updates) => ({   //arguments ID and updates, nei
 });
 
 export const startEditExpense = (id, updates) => {
-    return (dispatch) => {
-        return database.ref(`expenses/${id}`).update(updates).then(() => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/expenses/${id}`).update(updates).then(() => {
             dispatch(editExpense(id, updates));
         });
     };
@@ -105,11 +108,13 @@ export const setExpenses = (expenses) => ({
 });
 
 export const startSetExpenses = () => {
-    return(dispatch) => {
-        return database.ref('expenses') //The 'return' here, makes sure the promise actually gets returned, and thats allow us to have access to 'then' at app.js were we dispatch.
+    return(dispatch, getState) => {
+        const uid = getState().auth.uid;
+        return database.ref(`users/${uid}/expenses`) //The 'return' here, makes sure the promise actually gets returned, and thats allow us to have access to 'then' at app.js were we dispatch.
             .once('value')
             .then((snapshot) => {
                 const expenses = []; 
+
                 snapshot.forEach((childSnapshot) => {
                  expenses.push({
                      id: childSnapshot.key,

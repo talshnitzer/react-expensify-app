@@ -4,10 +4,11 @@ import { createBrowserHistory } from 'history';
 import AddExpensePage from '../components/AddExpensePage';
 import ExpenseDashboardPage from '../components/ExpenseDashboardPage';
 import EditExpensePage from '../components/EditExpensePage';
-import HelpPage from '../components/HelpPage';
+//import HelpPage from '../components/HelpPage'; //HelpPage was deleted from router and from app
 import NotFoundPage from '../components/NotFoundPage';
 import LoginPage from '../components/LoginPage';
-import PrivateRoute from './PrivateRoute'
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 export const history = createBrowserHistory();//creating 'history' manually (not by react-router)
 
@@ -28,11 +29,10 @@ const AppRouter = ()  => ( //At this point we have a valid router set up
     <Router history={history}>
         <div>
             <Switch>
-                <Route path="/" component={LoginPage} exact={true}></Route>
+                <PublicRoute path="/" component={LoginPage} exact={true}></PublicRoute>
                 <PrivateRoute path="/dashboard" component={ExpenseDashboardPage} exact={true}></PrivateRoute>
                 <PrivateRoute path="/create" component={AddExpensePage}></PrivateRoute>
                 <PrivateRoute path="/edit/:id" component={EditExpensePage}></PrivateRoute>
-                <Route path="/help" component={HelpPage}></Route>
                 <Route component={NotFoundPage}></Route>
             </Switch>
         </div>
