@@ -1,0 +1,7 @@
+//This is where we define that Max width container where we center everything nicely  
+.content-container { 
+    margin:  0 auto; //'auto' makes sure to evenly distribute the rest of the space (browser width-container width) on the left and the right 
+    padding: 0 $m-size; //padding to the left and the right - make sure that none of our content ever pushes up right against the edge of the browser.
+    max-width: 80rem;
+
+}

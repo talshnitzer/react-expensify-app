@@ -9,10 +9,11 @@ export const PrivateRoute = ({
     ...rest //Operator '...' to get all the stuff that we did not deep structure.
  }) => ( 
     <Route {...rest} component={(props) => ( //pass the props ('...rest' that we passed to 'Route') to the individual component
+    //below - passing props that we get when using 'Route', but not getting if we define it like like 'history'
         isAuthenticated ? (
             <div>
                 <Header />
-                <Component  {...props}/> //passing props that we get whn using 'Route' but not getting if we define it like this (like 'history')
+                <Component  {...props}/> 
             </div>
         ) : (
             <Redirect to="/" /> //when redirect gets rendered it redirects you.

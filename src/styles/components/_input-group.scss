@@ -1,0 +1,20 @@
+.input_group {
+    display: flex; //by default arrange the items in a row left to right
+    flex-direction: column; //for mobile arrange items from top to bottom
+    margin-bottom: $m-size;
+
+    //styles we apply for larger screens, apply only when the min width is 45rem
+    @media (min-width: $desktop-breakpoint) { 
+        flex-direction: row;
+        margin-bottom: $l-size;
+    }
+}
+
+.input_group__item {
+    margin-bottom: $s-size;
+    
+    @media (min-width: $desktop-breakpoint) { 
+        margin: 0 $s-size 0 0; //margin only on the right side
+    }
+}
+

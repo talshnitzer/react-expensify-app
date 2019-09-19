@@ -11,6 +11,7 @@ import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css'; //for ExpenseForm
 import { firebase } from './firebase/firebase';
+import LoadingPage from './components/LoadingPage';
 
 
 const store = configureStore();
@@ -40,12 +41,13 @@ const renderApp = () => { //render the app only once in the case it was not rend
     }
 };
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 //If we see these messages then we know we trigger the authentication related functionality
 //You only have access to the 'history' object if your component is directly rendered by the Route component or if you use withRouter
 //in this context we are not inside of a component registered to a route.we just want to access 'history' API.
 //so we use the 'history' module that we created in AppRouter
+
 firebase.auth().onAuthStateChanged((user) => {
     if(user) {
         store.dispatch(login(user.uid));

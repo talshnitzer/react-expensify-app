@@ -1,0 +1,24 @@
+.big_button {
+    background: $blue;
+    border: none;
+    color: white;
+    border-top: .2rem solid darken($blue , 10%);
+    border-top-right-radius: .2rem solid darken(lightgrey, 10%);
+    display: inline-block;//for styling links a button - takes into account the top and bottom padding and margin
+    margin: $m-size;
+    font-size: $font-size-large;
+    line-height: 1;
+    padding: $s-size;
+    font-weight: 300;
+    text-decoration: none;// to get rid of the underline
+}
+
+.button--link {
+    background: none;
+    border: none;
+}
+
+.button--secondary {
+    background: #888888;
+    border: none;
+}

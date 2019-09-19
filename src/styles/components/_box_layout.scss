@@ -1,0 +1,22 @@
+.box-layout {
+    align-items: center; //center the __box one way
+    background: url('/images/bg.jpg');//this is not a path that takes into account the entire directory structure of our project, because this code runs in the browser, the browser only has access to what's in the public directory.
+    background-size: cover;//always cover the container with the image.So as we adjust the image or the browser's height and width it still cover the entire box layout.
+    display: flex;//in order to center the __box (below)
+    height: 100vh;//100% of the viewport height
+    justify-content: center; //center the __box one way
+    width: 100vw;//100% of the viewport width
+}
+
+.box-layout__box {
+    background: fade-out(white, .15);//15% transparancy
+    border-radius: 3px; //round the box corners
+    padding: $l-size $m-size;//padding a space between the edge of the box and the stuff inside of the box;
+    text-align: center;
+    width: 25rem;
+}
+
+.box-layout__title {
+    margin: 0 0 $m-size 0;//margin on all side except the bottom because we have padding (in __box)
+    line-height: 1; //distribute evenly the space above and below h1
+}

@@ -1,0 +1,12 @@
+.loader { //center the image in the screen
+    align-items: center;//center it one way
+    display: flex;
+    height: 100vh; //100% of the browser height
+    justify-content: center; //center it the other way
+    width: 100vw;
+}
+
+.loader__image { //change the img size
+    height: 6rem;
+    width: 6rem;
+}

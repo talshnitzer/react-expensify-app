@@ -1,0 +1,18 @@
+.header {
+    background: $dark-blue;
+}
+
+.header__content {
+    align-items: center;//align all of the items vertically inside of the header area
+    display: flex;
+    justify-content: space-between; //distribute all of the left over space between the expensify title and logout button.
+    padding: $s-size 0; //padding on the top and the bottom
+}
+
+.header__title {
+    color: white;
+    text-decoration: none; //clear the default text decorator for 'Link' which is underline
+    h1 {
+        margin: 0;
+    } //target all the 'h1' under header__title
+}

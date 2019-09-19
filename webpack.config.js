@@ -35,7 +35,7 @@ module.exports = (env) => { //the env arg is defined in build:prod script in pac
     const CSSExtract = new ExtractTextPlugin('styles.css'); //plugin to make webpack save the css compiled files outside of bundle.js, in a file name we pass here as arg
 
     return {
-        entry: './src/app.js',
+        entry: ['babel-polyfill','./src/app.js'],//multiple entry points definedin array of strings - this set up Babel polyfill, and then include our app. babel polyfill add supoort for older browsers
         output: {
             path: path.join(__dirname,'public','dist'),
             filename: 'bundle.js'

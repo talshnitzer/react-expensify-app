@@ -1,3 +1,7 @@
+* { 
+    box-sizing: border-box; //calculate the input height we define as 'bruto' including the padding and border.
+}
+
 // rem is a way to define size instead of px
 html {
     font-size:62.5%; //defined so we work with rem in a 10 based system 1 rem=>16px. 
@@ -5,8 +9,10 @@ html {
 }
 
 body{
+    color: $dark-grey; //instead of usin the default black we use gray
     font-family:  Helvetica, Arial, sans-serif;
     font-size: $m-size; //16px
+    line-height: 1.6; //distribution between paragraphs
 }
 
 button {        //definition for all buttons in app
